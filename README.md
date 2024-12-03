@@ -5,14 +5,15 @@ $ cd scripts <br>
 $ __./genkey.sh__ <br>
 -rw-rw-r-- 1 chyi chyi 45 11월 17 09:28 privatekey <br>
 -rw-rw-r-- 1 chyi chyi 45 11월 17 09:28 publickey <br>
-## How to build
+## How to build and rune
 Caution: <br>
  1) You must first copy this folder under samples/net/sockets. <br>
  2) You must edit the prj.conf and src/wireguard_vpn.h files for vpn settings.<br> 
+ <br>
 $ __west build -b nucleo_f207zg samples/net/sockets/wireguard__
-## How to run
 $ __west flash__ <br>
 ## My blog posting for this project 
+  For more information, please read the blog posting below.<br>
   https://slowbootkernelhacks.blogspot.com/2024/12/zephyr-rtos-programming.html <br>
 ## Limitations
   It only works in IPv4 environments.<br>
