@@ -1,0 +1,19 @@
+# Private config options for wireguard app
+
+# Copyright (c) 2024 Chunghan Yi <chunghan.yi@gmail.com>
+# Copyright (c) 2018 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+mainmenu "Networking wireguard application"
+
+config NET_CONFIG_VPN_IPV4_ADDR
+	string "My IPv4 address for virtual interface"
+	help
+	  The value depends on your network setup.
+
+config NET_CONFIG_VPN_IPV4_NETMASK
+	string "My IPv4 netmask for virtual interface"
+	help
+	  The value depends on your network setup.
+
+source "Kconfig.zephyr"
