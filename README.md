@@ -16,6 +16,7 @@ The code above was tested in a zephyr 3.7.0 environment with stm32 board.<br>
   For more information, please read the blog posting below.<br>
   https://slowbootkernelhacks.blogspot.com/2024/12/zephyr-rtos-programming.html <br>
 ## Limitations
+  It is still in the early stages of development.<br>
   It only works in IPv4 environments.<br>
 ## Reference codes
   https://github.com/smartalock/wireguard-lwip <br>
