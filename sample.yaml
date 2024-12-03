@@ -17,7 +17,7 @@ tests:
       - frdm_k64f
       - qemu_cortex_m3
       - frdm_kw41z
-	  - nucleo_f207zg
+      - nucleo_f207zg
       - qemu_cortex_a53
       - native_sim
     integration_platforms:
