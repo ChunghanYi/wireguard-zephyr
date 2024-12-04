@@ -183,6 +183,10 @@ static err_t wireguardif_output_to_peer(struct netif *netif, struct pbuf *q,
 
 			// Calculate the outgoing packet size - round up to next 16 bytes, add 16 bytes for header
 			if (q) {
+				if (q->tot_len > 4096) {
+					LOG_DBG("Hmm, too big message(q->tot_len: %d) received. I'll be ignored.", q->tot_len);
+					return ERR_RTE;
+				}
 				// This is actual transport data
 				unpadded_len = q->tot_len;
 			} else {
@@ -194,10 +198,16 @@ static err_t wireguardif_output_to_peer(struct netif *netif, struct pbuf *q,
 			// The buffer needs to be allocated from "transport" pool to leave room for LwIP generated IP headers
 			// The IP packet consists of 16 byte header (struct message_transport_data), data padded upto 16 byte boundary + encrypted auth tag (16 bytes)
 			pbuf = (struct pbuf *)malloc(sizeof(struct pbuf));
-			pbuf->payload = (void *)malloc(header_len + padded_len + WIREGUARD_AUTHTAG_LEN);
-			pbuf->len = header_len + padded_len + WIREGUARD_AUTHTAG_LEN;
-			pbuf->tot_len = pbuf->len;
 			if (pbuf) {
+				pbuf->payload = (void *)malloc(header_len + padded_len + WIREGUARD_AUTHTAG_LEN);
+				if (pbuf->payload == NULL) {
+					LOG_ERR("Cannot allocate an area for payload.");
+					result = ERR_MEM;
+					return result;
+				}
+				pbuf->len = header_len + padded_len + WIREGUARD_AUTHTAG_LEN;
+				pbuf->tot_len = pbuf->len;
+
 				// Note: allocating pbuf from RAM above guarantees that the pbuf is in one section and not chained
 				// - i.e payload points to the contiguous memory region
 				memset(pbuf->payload, 0, pbuf->tot_len);
@@ -218,6 +228,10 @@ static err_t wireguardif_output_to_peer(struct netif *netif, struct pbuf *q,
 
 					// Copy pbuf to memory - handles case where pbuf is chained
 					memcpy(dst, q->payload, unpadded_len);
+				}
+
+				if (unpadded_len == 32) {  /* Oops! net ping 10.1.1.200 */
+					k_sleep(K_MSEC(100));
 				}
 
 				// Then encrypt

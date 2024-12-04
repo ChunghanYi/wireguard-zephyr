@@ -130,6 +130,12 @@ static int virtual_wg_interface_send(struct net_if *iface,
 			(ntohl(ip->dest.addr) >>  8) & 0xFF,
 			(ntohl(ip->dest.addr) >>  0) & 0xFF);
 
+	if (r > 4096) {
+		net_pkt_unref(pkt);
+		LOG_DBG("Hmm, too big message(r:%d) received.", r);
+		return NET_CONTINUE;
+	}
+
 	u.len = u.tot_len = r;
 	addr.u_addr.ip4.addr = ip->dest.addr;
 	wireguardif_output(wg_netif, &u, &addr);
