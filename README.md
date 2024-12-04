@@ -16,7 +16,7 @@ The code above was tested in a zephyr 3.7.0 environment with stm32 board.<br>
   For more information, please read the blog posting below.<br>
   https://slowbootkernelhacks.blogspot.com/2024/12/zephyr-rtos-programming.html <br><br>
   Caution: <br>
-  <span style="color:read">You must first proceed with the patch by referring to the subsys/net/ip/icmpv4.c.patch file.</span> <br><br>
+  <span style="color:red">You must first proceed with the patch by referring to the subsys/net/ip/icmpv4.c.patch file.</span> <br><br>
 ## Limitations
   <span style="color:blue">It is still in the early stages of development.</span><br>
   It only works in IPv4 environments.<br>
