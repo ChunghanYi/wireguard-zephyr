@@ -14,7 +14,9 @@ $ __west flash__ <br><br>
 The code above was tested in a zephyr 3.7.0 environment with stm32 board.<br>
 ## My blog posting for this project
   For more information, please read the blog posting below.<br>
-  https://slowbootkernelhacks.blogspot.com/2024/12/zephyr-rtos-programming.html <br>
+  https://slowbootkernelhacks.blogspot.com/2024/12/zephyr-rtos-programming.html <br><br>
+  Caution: <br>
+  You must first proceed with the patch by referring to the subsys/net/ip/icmpv4.c.patch file. <br><br>
 ## Limitations
   It is still in the early stages of development.<br>
   It only works in IPv4 environments.<br>
