@@ -19,7 +19,7 @@ The code above was tested in a zephyr 3.7.0 environment with stm32 board.<br>
   <span style="color:red">You must first proceed with the patch by referring to the subsys/net/ip/icmpv4.c.patch file.</span> <br><br>
 ## Limitations
   <span style="color:blue">It is still in the early stages of development.</span><br>
-  It only works in IPv4 environments.<br>
+  It only works in IPv4 and ethernet environments(Wi-Fi support is under consideration).<br>
 ## Reference codes
   https://github.com/smartalock/wireguard-lwip <br>
   The code is copyrighted under BSD 3 clause Copyright (c) 2021 Daniel Hope (www.floorsense.nz)<br><br>
