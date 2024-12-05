@@ -11,7 +11,7 @@ $ __./genkey.sh__ <br>
   You must edit the prj.conf and src/wireguard_vpn.h files for vpn settings.<br><br>
 $ __west build -b nucleo_f207zg samples/net/sockets/wireguard__ <br>
 $ __west flash__ <br><br>
-The code above was tested in a zephyr 3.7.0 environment with stm32 board which has an ethernet port.<br><br>
+The code above was tested in a zephyr 3.7.0 and 4.0 environment with stm32 board which has an ethernet port.<br><br>
 Good luck~ 😎
 ## My blog posting for this project
   For more information, please read the blog posting below.<br>
