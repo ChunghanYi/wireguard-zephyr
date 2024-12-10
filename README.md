@@ -9,8 +9,33 @@ $ __./genkey.sh__ <br>
   Caution: <br>
   You must first copy this folder under samples/net/sockets. <br>
   You must edit the prj.conf and src/wireguard_vpn.h files for vpn settings.<br><br>
-$ __west build -b nucleo_f207zg samples/net/sockets/wireguard__ <br>
-$ __west flash__ <br><br>
+```
+$ cp -R ./wireguard-zephyr $YOUR_PATH/zephyr/samples/net/sockets/wireguard
+
+$ cd $YOUR_PATH/zephyr
+$ vi samples/net/wireguard/prj.conf
+-> Fix some configurations
+CONFIG_NET_CONFIG_MY_IPV4_ADDR="192.168.8.50"
+CONFIG_NET_CONFIG_MY_IPV4_NETMASK="255.255.255.0"
+CONFIG_NET_CONFIG_PEER_IPV4_ADDR="192.168.8.1"
+CONFIG_NET_CONFIG_VPN_IPV4_ADDR="10.1.1.50"
+CONFIG_NET_CONFIG_VPN_IPV4_NETMASK="255.255.255.0"
+
+$ vi samples/net/wireguard/src/wireguard_vpn.h
+-> Fix some configurations
+#define WG_LOCAL_ADDRESS        IPADDR4_INIT_BYTES(10, 1, 1, 50)   // my vpn ip address
+#define WG_LOCAL_NETMASK        IPADDR4_INIT_BYTES(255, 255, 255, 0)
+#define WG_LOCAL_NETWORK        IPADDR4_INIT_BYTES(10, 1, 1, 0)
+#define WG_CLIENT_PRIVATE_KEY   "kL/HdaoIlqlDmrjtIkb/0PmF+3N7eApdkrjUQvsbK0c="
+#define WG_CLIENT_PORT          51820
+#define WG_PEER_PUBLIC_KEY      "isbaRdaRiSo5/WtqEdmpH+NrFeT1+QoLvnhVI1oFfhE="
+#define WG_PEER_PORT            51820
+#define WG_ENDPOINT_ADDRESS     IPADDR4_INIT_BYTES(192, 168, 8, 139)  //peer endpoint(real) ip address
+
+$ west build -b nucleo_f207zg samples/net/sockets/wireguard
+$ west flash
+
+```
 The code above was tested in a zephyr 3.7.0 and 4.0 environment with stm32 board which has an ethernet port.<br><br>
 Good luck~ 😎
 ## My blog posting for this project
