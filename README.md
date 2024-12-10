@@ -13,6 +13,7 @@ $ ./genkey.sh <br>
   You must edit the prj.conf and src/wireguard_vpn.h files for vpn settings.<br><br>
 ```
 $ cp -R ./wireguard-zephyr $YOUR_PATH/zephyr/samples/net/sockets/wireguard
+$ cd $YOUR_PATH/zephyr
 
 $ vi subsys/net/ip/icmpv4.c
 -> See the patch/subsys/net/ip/icmpv4.c or icmpv4.c.patch file
@@ -32,7 +33,6 @@ enum net_verdict net_icmpv4_input(struct net_pkt *pkt,
 	...
 }
 
-$ cd $YOUR_PATH/zephyr
 $ vi samples/net/wireguard/prj.conf
 -> Fix some configurations
 CONFIG_NET_CONFIG_MY_IPV4_ADDR="192.168.8.50"
